@@ -2,8 +2,8 @@
 
 namespace Tests\VCR;
 
+use Symfony\Contracts\EventDispatcher\Event;
 use Tests\TestCase;
-use Symfony\Component\EventDispatcher\Event;
 use org\bovigo\vfs\vfsStream;
 use VCR\VCR;
 use VCR\VCREvents;
