@@ -2,11 +2,12 @@
 
 namespace Tests\VCR\Util;
 
+use Tests\TestCase;
 use VCR\Response;
 use VCR\Request;
 use VCR\Util\HttpClient;
 
-class HttpClientTest extends \PHPUnit_Framework_TestCase
+class HttpClientTest extends TestCase
 {
     public function testCreateHttpClient()
     {

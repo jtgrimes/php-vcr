@@ -2,6 +2,7 @@
 
 namespace Tests\VCR\Event;
 
+use Tests\TestCase;
 use VCR\Event\BeforeRecordEvent;
 use VCR\Request;
 use VCR\Cassette;
@@ -9,14 +10,14 @@ use VCR\Configuration;
 use VCR\Storage;
 use VCR\Response;
 
-class BeforeRecordEventTest extends \PHPUnit_Framework_TestCase
+class BeforeRecordEventTest extends TestCase
 {
     /**
      * @var BeforeRecordEvent
      */
     private $event;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->event = new BeforeRecordEvent(
             new Request('GET', 'http://example.com'),

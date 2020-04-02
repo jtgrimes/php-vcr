@@ -4,6 +4,7 @@ namespace Tests\VCR;
 
 use lapistano\ProxyObject\ProxyBuilder;
 use org\bovigo\vfs\vfsStream;
+use Tests\TestCase;
 use VCR\Configuration;
 use VCR\Request;
 use VCR\Response;
@@ -12,10 +13,7 @@ use VCR\VCR;
 use VCR\VCRFactory;
 use VCR\Videorecorder;
 
-/**
- * Test Videorecorder.
- */
-class VideorecorderTest extends \PHPUnit_Framework_TestCase
+class VideorecorderTest extends TestCase
 {
     public function testCreateVideorecorder()
     {
@@ -54,20 +52,15 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
         $configuration->enableLibraryHooks(array());
         $configuration->setMode('new_episodes');
 
-        $proxy = new ProxyBuilder('\VCR\Videorecorder');
-        $videorecorder = $proxy
-            ->setConstructorArgs(array($configuration, $client, VCRFactory::getInstance()))
-            ->setProperties(array('cassette', 'client'))
-            ->getProxy();
-        $videorecorder->client = $client;
-        $videorecorder->cassette = $this->getCassetteMock($request, $response);
+        $videorecorder = new Videorecorder($configuration, $client, VCRFactory::getInstance());
+        $this->setProtectedProperty($videorecorder, 'cassette', $this->getCassetteMock($request, $response));
 
         $this->assertEquals($response, $videorecorder->handleRequest($request));
     }
 
     public function testHandleRequestThrowsExceptionWhenModeIsNone()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'LogicException',
             "The request does not match a previously recorded request and the 'mode' is set to 'none'. "
             . "If you want to send the request anyway, make sure your 'mode' is set to 'new_episodes'."
@@ -80,14 +73,8 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
         $configuration->enableLibraryHooks(array());
         $configuration->setMode('none');
 
-        $proxy = new ProxyBuilder('\VCR\Videorecorder');
-        $videorecorder = $proxy
-            ->setConstructorArgs(array($configuration, $client, VCRFactory::getInstance()))
-            ->setProperties(array('cassette', 'client'))
-            ->getProxy();
-        $videorecorder->client = $client;
-
-        $videorecorder->cassette = $this->getCassetteMock($request, $response, 'none');
+        $videorecorder = new Videorecorder($configuration, $client, VCRFactory::getInstance());
+        $this->setProtectedProperty($videorecorder, 'cassette', $this->getCassetteMock($request, $response, 'none'));
 
         $videorecorder->handleRequest($request);
     }
@@ -101,21 +88,15 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
         $configuration->enableLibraryHooks(array());
         $configuration->setMode('once');
 
-        $proxy = new ProxyBuilder('\VCR\Videorecorder');
-        $videorecorder = $proxy
-            ->setConstructorArgs(array($configuration, $client, VCRFactory::getInstance()))
-            ->setProperties(array('cassette', 'client'))
-            ->getProxy();
-        $videorecorder->client = $client;
-
-        $videorecorder->cassette = $this->getCassetteMock($request, $response, 'once', true);
+        $videorecorder = new Videorecorder($configuration, $client, VCRFactory::getInstance());
+        $this->setProtectedProperty($videorecorder, 'cassette', $this->getCassetteMock($request, $response, 'once', true));
 
         $this->assertEquals($response, $videorecorder->handleRequest($request));
     }
 
     public function testHandleRequestThrowsExceptionWhenModeIsOnceAndCassetteIsOld()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'LogicException',
             "The request does not match a previously recorded request and the 'mode' is set to 'once'. "
             . "If you want to send the request anyway, make sure your 'mode' is set to 'new_episodes'."
@@ -128,14 +109,8 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
         $configuration->enableLibraryHooks(array());
         $configuration->setMode('once');
 
-        $proxy = new ProxyBuilder('\VCR\Videorecorder');
-        $videorecorder = $proxy
-            ->setConstructorArgs(array($configuration, $client, VCRFactory::getInstance()))
-            ->setProperties(array('cassette', 'client'))
-            ->getProxy();
-        $videorecorder->client = $client;
-
-        $videorecorder->cassette = $this->getCassetteMock($request, $response, 'once', false);
+        $videorecorder = new Videorecorder($configuration, $client, VCRFactory::getInstance());
+        $this->setProtectedProperty($videorecorder, 'cassette', $this->getCassetteMock($request, $response, 'once', false));
 
         $videorecorder->handleRequest($request);
     }

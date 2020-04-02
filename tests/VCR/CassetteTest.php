@@ -3,6 +3,7 @@
 namespace Tests\VCR;
 
 use org\bovigo\vfs\vfsStream;
+use Tests\TestCase;
 use VCR\Cassette;
 use VCR\Configuration;
 use VCR\Request;
@@ -12,7 +13,7 @@ use VCR\Storage\Yaml;
 /**
  * Test integration of PHPVCR with PHPUnit.
  */
-class CassetteTest extends \PHPUnit_Framework_TestCase
+class CassetteTest extends TestCase
 {
 
     /**
@@ -20,7 +21,7 @@ class CassetteTest extends \PHPUnit_Framework_TestCase
      */
     private $cassette;
 
-    public function setUp()
+    public function setUp() : void
     {
         vfsStream::setup('test');
         $this->cassette = new Cassette('test', new Configuration(), new Yaml(vfsStream::url('test/'), 'json_test'));
@@ -28,7 +29,7 @@ class CassetteTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidCassetteName()
     {
-        $this->setExpectedException('\VCR\VCRException', 'Cassette name must be a string, array given.');
+        $this->expectException('\VCR\VCRException', 'Cassette name must be a string, array given.');
         new Cassette(array(), new Configuration(), new Yaml(vfsStream::url('test/'), 'json_test'));
     }
 

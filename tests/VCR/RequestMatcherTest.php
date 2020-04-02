@@ -2,10 +2,11 @@
 
 namespace Tests\VCR;
 
+use Tests\TestCase;
 use VCR\Request;
 use VCR\RequestMatcher;
 
-class RequestMatcherTest extends \PHPUnit_Framework_TestCase
+class RequestMatcherTest extends TestCase
 {
     public function testMatchingMethod()
     {

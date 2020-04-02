@@ -2,6 +2,7 @@
 
 namespace Tests\VCR;
 
+use Tests\TestCase;
 use Symfony\Component\EventDispatcher\Event;
 use org\bovigo\vfs\vfsStream;
 use VCR\VCR;
@@ -10,9 +11,9 @@ use VCR\VCREvents;
 /**
  * Test integration of PHPVCR with PHPUnit.
  */
-class VCRTest extends \PHPUnit_Framework_TestCase
+class VCRTest extends TestCase
 {
-    public static function setupBeforeClass()
+    public static function setupBeforeClass() : void
     {
         VCR::configure()->setCassettePath('tests/fixtures') ;
     }
@@ -20,7 +21,7 @@ class VCRTest extends \PHPUnit_Framework_TestCase
     public function testUseStaticCallsNotInitialized()
     {
         VCR::configure()->enableLibraryHooks(array('stream_wrapper'));
-        $this->setExpectedException(
+        $this->expectException(
             'VCR\VCRException',
             'Please turn on VCR before inserting a cassette, use: VCR::turnOn()'
         );
@@ -83,7 +84,7 @@ class VCRTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionIfNoCassettePresent()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'BadMethodCallException',
             'Invalid http request. No cassette inserted. Please make sure to insert '
             . "a cassette in your unit test using VCR::insertCassette('name');"
@@ -104,6 +105,7 @@ class VCRTest extends \PHPUnit_Framework_TestCase
         VCR::insertCassette('unittest_cassette1');
         VCR::insertCassette('unittest_cassette2');
         // TODO: Check of cassette was changed
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testDoesNotBlockThrowingExceptions()
@@ -111,7 +113,7 @@ class VCRTest extends \PHPUnit_Framework_TestCase
         $this->configureVirtualCassette();
 
         VCR::turnOn();
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         VCR::insertCassette('unittest_cassette1');
         throw new \InvalidArgumentException('test');
     }

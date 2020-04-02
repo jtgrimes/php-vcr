@@ -3,12 +3,13 @@
 namespace Tests\VCR;
 
 use org\bovigo\vfs\vfsStream;
+use Tests\TestCase;
 use VCR\VCRFactory;
 
 /**
  * Test instance creation.
  */
-class VCRFactoryTest extends \PHPUnit_Framework_TestCase
+class VCRFactoryTest extends TestCase
 {
     /**
      * @dataProvider instanceProvider

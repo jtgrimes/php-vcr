@@ -2,6 +2,7 @@
 
 namespace Tests\VCR\LibraryHooks;
 
+use Tests\TestCase;
 use VCR\LibraryHooks\CurlHook;
 use VCR\Request;
 use VCR\Response;
@@ -12,7 +13,7 @@ use VCR\Util\StreamProcessor;
 /**
  * Test if intercepting http/https using curl works.
  */
-class CurlHookTest extends \PHPUnit_Framework_TestCase
+class CurlHookTest extends TestCase
 {
     public $expected = 'example response body';
     /**
@@ -24,7 +25,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
      */
     protected $curlHook;
 
-    public function setup()
+    public function setup() : void
     {
         $this->config = new Configuration();
         $this->curlHook = new CurlHook(new CurlCodeTransform(), new StreamProcessor($this->config));
@@ -64,7 +65,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         $response = curl_exec($curlHandle);
         curl_close($curlHandle);
 
-        $this->assertContains('Example Domain', $response, 'Response from http://example.com should contain "Example Domain".');
+        $this->assertStringContainsString('Example Domain', $response, 'Response from http://example.com should contain "Example Domain".');
     }
 
     /**
@@ -85,6 +86,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_exec($curlHandle);
         curl_close($curlHandle);
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testShouldWriteFileOnFileDownload()
@@ -212,7 +214,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         $info = curl_getinfo($curlHandle);
         curl_close($curlHandle);
 
-        $this->assertInternalType('array', $info, 'curl_getinfo() should return an array.');
+        $this->assertIsArray($info, 'curl_getinfo() should return an array.');
         $this->assertCount(21, $info, 'curl_getinfo() should return 21 values.');
         $this->curlHook->disable();
     }
@@ -227,7 +229,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         $info = curl_getinfo($curlHandle);
         curl_close($curlHandle);
 
-        $this->assertInternalType('array', $info, 'curl_getinfo() should return an array.');
+        $this->assertIsArray($info, 'curl_getinfo() should return an array.');
         $this->assertArrayHasKey('url', $info);
         $this->assertArrayHasKey('content_type', $info);
         $this->assertArrayHasKey('http_code', $info);
@@ -249,12 +251,14 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('starttransfer_time', $info);
         $this->assertArrayHasKey('redirect_time', $info);
         $this->curlHook->disable();
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testShouldNotThrowErrorWhenDisabledTwice()
     {
         $this->curlHook->disable();
         $this->curlHook->disable();
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testShouldNotThrowErrorWhenEnabledTwice()
@@ -262,6 +266,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         $this->curlHook->enable($this->getTestCallback());
         $this->curlHook->enable($this->getTestCallback());
         $this->curlHook->disable();
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testShouldInterceptMultiCallWhenEnabled()
@@ -332,6 +337,7 @@ class CurlHookTest extends \PHPUnit_Framework_TestCase
         curl_multi_exec($curlMultiHandle);
         curl_multi_remove_handle($curlMultiHandle, $curlHandle);
         curl_multi_close($curlMultiHandle);
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     /**

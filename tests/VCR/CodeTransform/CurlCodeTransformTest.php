@@ -2,21 +2,18 @@
 
 namespace Tests\VCR\CodeTransform;
 
-use lapistano\ProxyObject\ProxyBuilder;
+use Tests\TestCase;
+use VCR\CodeTransform\CurlCodeTransform;
 
-class CurlCodeTransformTest extends \PHPUnit_Framework_TestCase
+class CurlCodeTransformTest extends TestCase
 {
     /**
      * @dataProvider codeSnippetProvider
      */
     public function testTransformCode($expected, $code)
     {
-        $proxy = new ProxyBuilder('\VCR\CodeTransform\CurlCodeTransform');
-        $filter = $proxy
-            ->setMethods(array('transformCode'))
-            ->getProxy();
-
-        $this->assertEquals($expected, $filter->transformCode($code));
+        $filter = new CurlCodeTransform();
+        $this->assertEquals($expected, $this->callProtected($filter, 'transformCode', [$code]));
     }
 
     public function codeSnippetProvider()

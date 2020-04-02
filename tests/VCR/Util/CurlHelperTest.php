@@ -3,11 +3,12 @@
 namespace Tests\VCR\Util;
 
 use org\bovigo\vfs\vfsStream;
+use Tests\TestCase;
 use VCR\Request;
 use VCR\Response;
 use VCR\Util\CurlHelper;
 
-class CurlHelperTest extends \PHPUnit_Framework_TestCase
+class CurlHelperTest extends TestCase
 {
     /**
      * @dataProvider getHttpMethodsProvider()
@@ -161,7 +162,7 @@ class CurlHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCurlOptionReadFunctionMissingSize()
     {
-        $this->setExpectedException('\VCR\VCRException', 'To set a CURLOPT_READFUNCTION, CURLOPT_INFILESIZE must be set.');
+        $this->expectException('\VCR\VCRException', 'To set a CURLOPT_READFUNCTION, CURLOPT_INFILESIZE must be set.');
         $request = new Request('POST', 'example.com');
 
         $callback = function ($curlHandle, $fileHandle, $size) {
@@ -178,8 +179,8 @@ class CurlHelperTest extends \PHPUnit_Framework_TestCase
 
         $test = $this;
         $callback = function ($curlHandle, $fileHandle, $size) use ($test, $expected) {
-            $test->assertInternalType('resource', $curlHandle);
-            $test->assertInternalType('resource', $fileHandle);
+            $test->assertIsResource($curlHandle);
+            $test->assertIsResource($fileHandle);
             $test->assertEquals(strlen($expected), $size);
 
             return $expected;

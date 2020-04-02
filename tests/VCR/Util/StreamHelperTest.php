@@ -2,10 +2,11 @@
 
 namespace Tests\VCR\Util;
 
+use Tests\TestCase;
 use VCR\Request;
 use VCR\Util\StreamHelper;
 
-class StreamHelperTest extends \PHPUnit_Framework_TestCase
+class StreamHelperTest extends TestCase
 {
     public function streamContexts()
     {

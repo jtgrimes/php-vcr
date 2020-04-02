@@ -2,20 +2,21 @@
 
 namespace Tests\VCR\Event;
 
+use Tests\TestCase;
 use VCR\Event\BeforePlaybackEvent;
 use VCR\Request;
 use VCR\Cassette;
 use VCR\Configuration;
 use VCR\Storage;
 
-class BeforePlaybackEventTest extends \PHPUnit_Framework_TestCase
+class BeforePlaybackEventTest extends TestCase
 {
     /**
      * @var BeforePlaybackEvent
      */
     private $event;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->event = new BeforePlaybackEvent(
             new Request('GET', 'http://example.com'),

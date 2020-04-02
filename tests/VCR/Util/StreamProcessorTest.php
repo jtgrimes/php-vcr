@@ -2,9 +2,10 @@
 
 namespace Tests\VCR\Util;
 
+use Tests\TestCase;
 use VCR\Util\StreamProcessor;
 
-class StreamProcessorTest extends \PHPUnit_Framework_TestCase
+class StreamProcessorTest extends TestCase
 {
 
     /**
@@ -98,6 +99,7 @@ class StreamProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->url_stat('tests/fixtures/streamprocessor_data', 0);
 
         restore_error_handler();
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     /**
@@ -105,6 +107,7 @@ class StreamProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testUrlStatFileNotFound()
     {
+        $this->expectError();
         $processor = new StreamProcessor();
         $processor->url_stat('file_not_found', 0);
     }
@@ -113,6 +116,7 @@ class StreamProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new StreamProcessor();
         $processor->url_stat('file_not_found', STREAM_URL_STAT_QUIET);
+        $this->assertTrue(true, 'No exceptions were thrown');
     }
 
     public function testDirOpendir()
@@ -126,7 +130,7 @@ class StreamProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $test = $this;
         set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($test) {
-            $test->assertContains('opendir(not_found', $errstr);
+            $test->assertStringContainsString('opendir(not_found', $errstr);
         });
 
         $processor = new StreamProcessor();

@@ -3,18 +3,19 @@
 namespace Tests\VCR\Storage;
 
 use org\bovigo\vfs\vfsStream;
+use Tests\TestCase;
 use VCR\Storage\Json;
 
 /**
  * Test integration of PHPVCR with PHPUnit.
  */
-class JsonTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends TestCase
 {
     protected $handle;
     protected $filePath;
     protected $jsonObject;
 
-    public function setUp()
+    public function setUp() : void
     {
         vfsStream::setup('test');
         $this->filePath = vfsStream::url('test/') . 'json_test';

@@ -2,19 +2,20 @@
 
 namespace Tests\VCR;
 
+use Tests\TestCase;
 use VCR\Request;
 
 /**
  * Test integration of PHPVCR with PHPUnit.
  */
-class RequestTest extends \PHPUnit_Framework_TestCase
+class RequestTest extends TestCase
 {
     /**
      * @var \VCR\Request
      */
     protected $request;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->request = new Request('GET', 'http://example.com', array('User-Agent' => 'Unit-Test'));
     }
@@ -61,7 +62,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testMatchesThrowsExceptionIfMatcherNotFound()
     {
         $request = new Request('POST', 'http://example.com', array('User-Agent' => 'Unit-Test'));
-        $this->setExpectedException(
+        $this->expectException(
             '\BadFunctionCallException',
             "Matcher could not be executed. Array\n(\n    [0] => some\n    [1] => method\n)\n"
         );
