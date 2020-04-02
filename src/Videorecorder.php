@@ -4,6 +4,7 @@ namespace VCR;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use VCR\Util\Assertion;
 use VCR\Util\HttpClient;
 use VCR\Event\AfterHttpRequestEvent;
