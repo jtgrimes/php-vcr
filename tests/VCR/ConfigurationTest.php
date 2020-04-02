@@ -34,7 +34,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             array(
                 'VCR\LibraryHooks\StreamWrapperHook',
                 'VCR\LibraryHooks\CurlHook',
-                'VCR\LibraryHooks\SoapHook',
             ),
             $this->config->getLibraryHooks()
         );

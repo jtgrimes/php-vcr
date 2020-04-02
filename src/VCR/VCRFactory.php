@@ -53,14 +53,6 @@ class VCRFactory
         return new $class($dsn, $cassetteName);
     }
 
-    protected function createVCRLibraryHooksSoapHook()
-    {
-        return new LibraryHooks\SoapHook(
-            $this->getOrCreate('VCR\CodeTransform\SoapCodeTransform'),
-            $this->getOrCreate('VCR\Util\StreamProcessor')
-        );
-    }
-
     protected function createVCRLibraryHooksCurlHook()
     {
         return new LibraryHooks\CurlHook(

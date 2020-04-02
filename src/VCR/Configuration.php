@@ -41,7 +41,6 @@ class Configuration
     private $availableLibraryHooks = array(
         'stream_wrapper' => 'VCR\LibraryHooks\StreamWrapperHook',
         'curl'           => 'VCR\LibraryHooks\CurlHook',
-        'soap'           => 'VCR\LibraryHooks\SoapHook',
     );
 
     /**
@@ -118,7 +117,7 @@ class Configuration
      *
      * @var array A blacklist is a list of paths.
      */
-    private $blackList = array('src/VCR/LibraryHooks/', 'src/VCR/Util/SoapClient', 'tests/VCR/Filter');
+    private $blackList = array('src/VCR/LibraryHooks/', 'tests/VCR/Filter');
 
     /**
      * The mode which determines how requests are handled. One of the MODE constants.
@@ -299,7 +298,7 @@ class Configuration
             throw new \InvalidArgumentException("Request matchers don't exist: " . join(', ', $invalidMatchers));
         }
         $this->enabledRequestMatchers = $matchers;
-        
+
         return $this;
     }
 

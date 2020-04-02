@@ -61,21 +61,6 @@ class VCRTest extends \PHPUnit_Framework_TestCase
         return $output;
     }
 
-    public function testShouldInterceptSoapLibrary()
-    {
-        VCR::configure()->enableLibraryHooks(array('soap'));
-        VCR::turnOn();
-        VCR::insertCassette('unittest_soap_test');
-
-        $client = new \SoapClient('https://raw.githubusercontent.com/php-vcr/php-vcr/master/tests/fixtures/soap/wsdl/weather.wsdl', array('soap_version' => SOAP_1_2));
-        $actual = $client->GetCityWeatherByZIP(array('ZIP' => '10013'));
-        $temperature = $actual->GetCityWeatherByZIPResult->Temperature;
-
-        $this->assertEquals('1337', $temperature, 'Soap call was not intercepted.');
-        VCR::eject();
-        VCR::turnOff();
-    }
-
     public function testShouldNotInterceptCallsToDevUrandom()
     {
         if ('\\' === DIRECTORY_SEPARATOR) {
