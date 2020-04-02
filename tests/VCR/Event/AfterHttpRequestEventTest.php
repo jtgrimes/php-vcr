@@ -1,7 +1,8 @@
 <?php
 
-namespace VCR\Event;
+namespace Tests\VCR\Event;
 
+use VCR\Event\AfterHttpRequestEvent;
 use VCR\Request;
 use VCR\Response;
 

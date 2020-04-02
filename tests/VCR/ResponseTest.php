@@ -1,6 +1,8 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
+
+use VCR\Response;
 
 /**
  * Test VCRs response object.

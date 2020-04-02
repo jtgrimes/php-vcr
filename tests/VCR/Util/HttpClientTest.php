@@ -1,9 +1,10 @@
 <?php
 
-namespace VCR\Util;
+namespace Tests\VCR\Util;
 
 use VCR\Response;
 use VCR\Request;
+use VCR\Util\HttpClient;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {

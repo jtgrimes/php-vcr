@@ -1,6 +1,6 @@
 <?php
 
-namespace VCR\CodeTransform;
+namespace Tests\VCR\CodeTransform;
 
 use lapistano\ProxyObject\ProxyBuilder;
 

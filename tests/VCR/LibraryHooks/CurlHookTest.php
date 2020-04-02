@@ -1,7 +1,8 @@
 <?php
 
-namespace VCR\LibraryHooks;
+namespace Tests\VCR\LibraryHooks;
 
+use VCR\LibraryHooks\CurlHook;
 use VCR\Request;
 use VCR\Response;
 use VCR\Configuration;

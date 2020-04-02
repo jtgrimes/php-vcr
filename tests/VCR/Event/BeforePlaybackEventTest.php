@@ -1,7 +1,8 @@
 <?php
 
-namespace VCR\Event;
+namespace Tests\VCR\Event;
 
+use VCR\Event\BeforePlaybackEvent;
 use VCR\Request;
 use VCR\Cassette;
 use VCR\Configuration;

@@ -1,8 +1,9 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
 
 use org\bovigo\vfs\vfsStream;
+use VCR\VCRFactory;
 
 /**
  * Test instance creation.

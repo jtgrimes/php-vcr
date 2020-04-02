@@ -1,6 +1,8 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
+
+use VCR\Request;
 
 /**
  * Test integration of PHPVCR with PHPUnit.

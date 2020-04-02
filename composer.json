@@ -31,9 +31,15 @@
     },
 
     "autoload": {
-        "classmap": ["src/"]
+        "psr-4": {
+            "VCR\\": "src/"
+        }
     },
-
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.4.x-dev"

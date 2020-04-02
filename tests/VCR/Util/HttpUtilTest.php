@@ -1,6 +1,8 @@
 <?php
 
-namespace VCR\Util;
+namespace Tests\VCR\Util;
+
+use VCR\Util\HttpUtil;
 
 class HttpUtilTest extends \PHPUnit_Framework_TestCase
 {

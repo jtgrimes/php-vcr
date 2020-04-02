@@ -1,9 +1,11 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
 
 use Symfony\Component\EventDispatcher\Event;
 use org\bovigo\vfs\vfsStream;
+use VCR\VCR;
+use VCR\VCREvents;
 
 /**
  * Test integration of PHPVCR with PHPUnit.

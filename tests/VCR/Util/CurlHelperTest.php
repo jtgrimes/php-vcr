@@ -1,10 +1,11 @@
 <?php
 
-namespace VCR\Util;
+namespace Tests\VCR\Util;
 
 use org\bovigo\vfs\vfsStream;
 use VCR\Request;
 use VCR\Response;
+use VCR\Util\CurlHelper;
 
 class CurlHelperTest extends \PHPUnit_Framework_TestCase
 {

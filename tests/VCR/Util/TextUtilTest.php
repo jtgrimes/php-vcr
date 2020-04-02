@@ -1,6 +1,8 @@
 <?php
 
-namespace VCR\Util;
+namespace Tests\VCR\Util;
+
+use VCR\Util\TextUtil;
 
 /**
  * Tests TextUtil methods.

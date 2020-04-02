@@ -1,6 +1,8 @@
 <?php
 
-namespace VCR\Storage;
+namespace Tests\VCR\Storage;
+
+use VCR\Storage\Blackhole;
 
 class BlackholeTest extends \PHPUnit_Framework_TestCase
 {

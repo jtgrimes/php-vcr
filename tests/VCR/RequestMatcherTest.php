@@ -1,6 +1,9 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
+
+use VCR\Request;
+use VCR\RequestMatcher;
 
 class RequestMatcherTest extends \PHPUnit_Framework_TestCase
 {

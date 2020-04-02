@@ -1,6 +1,6 @@
 <?php
 
-namespace VCR\CodeTransform;
+namespace Tests\VCR\CodeTransform;
 
 class AbstractCodeTransformTest extends \PHPUnit_Framework_TestCase
 {

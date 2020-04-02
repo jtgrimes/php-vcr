@@ -1,8 +1,9 @@
 <?php
 
-namespace VCR\Util;
+namespace Tests\VCR\Util;
 
 use VCR\Request;
+use VCR\Util\StreamHelper;
 
 class StreamHelperTest extends \PHPUnit_Framework_TestCase
 {

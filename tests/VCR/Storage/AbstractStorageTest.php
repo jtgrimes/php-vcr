@@ -1,8 +1,9 @@
 <?php
 
-namespace VCR\Storage;
+namespace Tests\VCR\Storage;
 
 use org\bovigo\vfs\vfsStream;
+use VCR\Storage\AbstractStorage;
 
 /**
  * Test integration of PHPVCR with PHPUnit.

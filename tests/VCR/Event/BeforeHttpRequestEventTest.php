@@ -1,7 +1,8 @@
 <?php
 
-namespace VCR\Event;
+namespace Tests\VCR\Event;
 
+use VCR\Event\BeforeHttpRequestEvent;
 use VCR\Request;
 
 class BeforeHttpRequestEventTest extends \PHPUnit_Framework_TestCase

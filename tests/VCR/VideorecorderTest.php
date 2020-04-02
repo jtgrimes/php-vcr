@@ -1,9 +1,16 @@
 <?php
 
-namespace VCR;
+namespace Tests\VCR;
 
 use lapistano\ProxyObject\ProxyBuilder;
 use org\bovigo\vfs\vfsStream;
+use VCR\Configuration;
+use VCR\Request;
+use VCR\Response;
+use VCR\Util\HttpClient;
+use VCR\VCR;
+use VCR\VCRFactory;
+use VCR\Videorecorder;
 
 /**
  * Test Videorecorder.
@@ -14,7 +21,7 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             '\VCR\Videorecorder',
-            new Videorecorder(new Configuration(), new Util\HttpClient(), VCRFactory::getInstance())
+            new Videorecorder(new Configuration(), new HttpClient(), VCRFactory::getInstance())
         );
     }
 
@@ -26,7 +33,7 @@ class VideorecorderTest extends \PHPUnit_Framework_TestCase
         $configuration->setCassettePath(vfsStream::url('testDir'));
         $configuration->enableLibraryHooks(array());
         $videorecorder = $this->getMockBuilder('\VCR\Videorecorder')
-            ->setConstructorArgs(array($configuration, new Util\HttpClient(), VCRFactory::getInstance()))
+            ->setConstructorArgs(array($configuration, new HttpClient(), VCRFactory::getInstance()))
             ->setMethods(array('eject'))
             ->getMock();
 
